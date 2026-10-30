@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Studio</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div class="bg-orb orb1"></div><div class="bg-orb orb2"></div>
+
+<main class="app">
+    <header class="top">
+        <div class="brand"><div class="logo">▦</div><div><h1>QR Studio</h1><p>Create, style and download QR codes</p></div></div>
+        <button id="themeBtn" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">◐</button>
+    </header>
+
+    <div class="layout">
+        <!-- LEFT: controls -->
+        <section class="panel controls">
+            <div class="tabs" id="tabs" role="tablist">
+                <button class="tab active" data-mode="text">🔗 Link / Text</button>
+                <button class="tab" data-mode="wifi">📶 Wi-Fi</button>
+                <button class="tab" data-mode="email">✉️ Email</button>
+                <button class="tab" data-mode="phone">📞 Phone</button>
+            </div>
+
+            <div class="form" data-form="text">
+                <label class="lbl">Content</label>
+                <div class="field"><textarea id="qrText" rows="3" placeholder="Paste a link or type anything…"></textarea>
+                    <span class="count" id="count">0</span></div>
+            </div>
+            <div class="form hidden" data-form="wifi">
+                <label class="lbl">Network name (SSID)</label><input id="wSsid" placeholder="MyWiFi">
+                <label class="lbl">Password</label><input id="wPass" placeholder="••••••••">
+                <label class="lbl">Security</label>
+                <select id="wSec"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">None</option></select>
+            </div>
+            <div class="form hidden" data-form="email">
+                <label class="lbl">To</label><input id="eTo" type="email" placeholder="hello@example.com">
+                <label class="lbl">Subject</label><input id="eSub" placeholder="Subject">
+                <label class="lbl">Message</label><input id="eBody" placeholder="Message">
+            </div>
+            <div class="form hidden" data-form="phone">
+                <label class="lbl">Phone number</label><input id="pNum" type="tel" placeholder="+91 98765 43210">
+            </div>
+
+            <div class="group">
+                <label class="lbl">Style</label>
+                <div class="swatches" id="swatches"></div>
+                <div class="row">
+                    <label class="mini">Code <input type="color" id="fgColor" value="#4f46e5"></label>
+                    <label class="mini">Background <input type="color" id="bgColor" value="#ffffff"></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="mini grow">Size
+                    <select id="qrSize"><option value="256">256 px</option><option value="512" selected>512 px</option><option value="1024">1024 px</option></select></label>
+                <label class="mini grow">Error correction
+                    <select id="ecc"><option value="L">Low</option><option value="M" selected>Medium</option><option value="Q">Quartile</option><option value="H">High</option></select></label>
+            </div>
+            <label class="mini">Margin <input type="range" id="margin" min="0" max="30" value="10"></label>
+        </section>
+
+        <!-- RIGHT: preview -->
+        <section class="panel preview">
+            <div class="stage" id="stage">
+                <div class="placeholder" id="placeholder"><div class="ph-grid"></div><p>Your QR code appears here</p></div>
+                <div class="loader" id="loader"></div>
+                <img id="qrimg" alt="QR Code" class="hidden">
+            </div>
+            <div class="status" id="status">Start typing, it updates live</div>
+
+            <div class="actions">
+                <button id="dlPng" class="primary" disabled>⬇ PNG</button>
+                <button id="dlSvg" class="ghost" disabled>⬇ SVG</button>
+                <button id="copyImg" class="ghost" disabled>⧉ Copy image</button>
+                <button id="shareBtn" class="ghost" disabled>↗ Share</button>
+            </div>
+
+            <div class="history">
+                <div class="hh"><h3>Recent</h3><button id="clearHistory" class="link-btn">Clear all</button></div>
+                <ul id="historyList"></ul>
+            </div>
+        </section>
+    </div>
+</main>
+
+<div id="toast" class="toast" role="status"></div>
+<script src="index.js"></script>
+</body>
+</html>
